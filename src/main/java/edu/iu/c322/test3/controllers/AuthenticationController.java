@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin
 public class AuthenticationController {
     private final AuthenticationManager authenticationManager;
     private final IAuthenticationService authenticationService;
 
     private TokenService tokenService;
-
 
     public AuthenticationController(AuthenticationManager authenticationManager,
                                     IAuthenticationService authenticationService,
@@ -31,8 +31,6 @@ public class AuthenticationController {
         this.authenticationService = authenticationService;
         this.tokenService = tokenService;
     }
-
-
     @PostMapping("/signup")
     public boolean register(@RequestBody Customer customer) {
         try {
@@ -45,13 +43,13 @@ public class AuthenticationController {
 
     @PostMapping("/signin")
     public String login(@RequestBody Customer customer) {
-            Authentication authentication = authenticationManager
-                    .authenticate(
-                            new UsernamePasswordAuthenticationToken(
-                                    customer.getUsername()
-                                    , customer.getPassword()));
-
+        Authentication authentication = authenticationManager
+                .authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                customer.getUsername()
+                                , customer.getPassword()));
         return tokenService.generateToken(authentication);
+
     }
 
 

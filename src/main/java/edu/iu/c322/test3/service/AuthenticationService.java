@@ -2,8 +2,6 @@ package edu.iu.c322.test3.service;
 
 import edu.iu.c322.test3.model.Customer;
 import edu.iu.c322.test3.repository.CustomerRepository;
-//import edu.iu.habahram.primesservice.model.Customer;
-//import edu.iu.habahram.primesservice.repository.AuthenticationDBRepository;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -55,8 +53,7 @@ public class AuthenticationService implements
     public UserDetails loadUserByUsername(String username)
             throws UsernameNotFoundException {
         try {
-            Customer customer =
-                    customerRepository.findByUsername(username);
+            Customer customer = customerRepository.findByUsername(username);
             if(customer == null) {
                 throw new UsernameNotFoundException("");
             }

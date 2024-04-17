@@ -32,14 +32,13 @@ public class CustomerRepository {
         }
     }
 
-
     public boolean save(Customer customer) throws IOException {
         Customer x = findByUsername(customer.getUsername());
         if(x == null) {
             Path path = Paths.get(DATABASE_NAME);
-            String data = String.format("%1$s,%2$s,%3s",
+            String data = String.format("%1$s,%2$s,%3$s",
                     customer.getUsername().trim(),
-                    customer.getUsername().trim(),
+                    customer.getPassword().trim(),
                     customer.getEmail().trim());
             data += NEW_LINE;
             Files.write(path,
